@@ -29,6 +29,8 @@ def instructions():
     print("The value of x will on almost every occasion be less than the answer in the question")
     print("And make sure you put down the right numbers")
     print()
+    print("When asked for the amount of rounds u want to play")
+    print("You can choose <enter> for infinite mode, or a number for the certain amount of rounds")
     print("Good luck and have fun")
     print("And make sure to answer as many questions correctly as possible")
     print()
