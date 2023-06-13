@@ -1,13 +1,8 @@
-def yes_no(question):
-    valid = False
-    while not valid:
-        response = input(question).lower()
+while True:
+    # Code to be executed repeatedly
+    print("Looping...")
 
-        if response == "yes" or response == "y":
-            return "yes"
-
-        elif response == "no" or response == "n":
-            return "no"
-
-        else:
-            print("Please answer Yes / No")
+    # Optional condition to break the loop
+    user_input = input("Enter 'xxx' to quit: ")
+    if user_input == 'xxx':
+        break

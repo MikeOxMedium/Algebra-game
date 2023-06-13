@@ -16,6 +16,8 @@ def yes_no(question):
         else:
             print("Please answer yes / no")
 
+# Shows the instructions
+
 
 def instructions():
     print()
@@ -31,10 +33,12 @@ def instructions():
     print()
     print("When asked for the amount of rounds u want to play")
     print("You can choose <enter> for infinite mode, or a number for the certain amount of rounds")
+    print("Make sure to answer these questions carefully and get as many questions right as possible")
     print("Good luck and have fun")
-    print("And make sure to answer as many questions correctly as possible")
     print()
 
+
+# Generates a decoration for the welcoming statement
 
 def statement_generator(statement, decoration):
     sides = decoration * 3
@@ -57,3 +61,7 @@ played_before = yes_no("Have you played this game before? ")
 
 if played_before == "no":
     instructions()
+
+
+
+
