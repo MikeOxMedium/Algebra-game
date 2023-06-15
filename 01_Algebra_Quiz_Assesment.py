@@ -52,10 +52,12 @@ def statement_generator(statement, decoration):
 
     return ""
 
+# Asks how many rounds or press <enter> for infinite mode
+
 
 def check_rounds():
     while True:
-        response = input("How many rounds? or press <Enter> for continuous mode: ")
+        response = input("How many rounds? or press <Enter> for infinite mode: ")
 
         round_error = "Please type either <enter> " \
                       "or an integer that is more than 0\n"
@@ -82,7 +84,7 @@ print()
 played_before = yes_no("Have you played this game before? ")
 
 if played_before == "no":
-        instructions()
+    instructions()
 
 
 # List of valid response
@@ -91,6 +93,8 @@ if played_before == "no":
 rounds_played = 0
 rounds_lost = 0
 rounds_drawn = 0
+
+mode = "regular"
 
 rounds = check_rounds()
 if rounds == "":
@@ -101,8 +105,7 @@ while rounds_played < rounds:
 
     print()
     if mode == "infinite":
-        heading = "Continuous Mode: " \
-                  "Round {}".format(rounds_played + 1)
+        heading = "Continuous Mode: "
         rounds += 1
 
     else:
@@ -110,7 +113,6 @@ while rounds_played < rounds:
                   "{}".format(rounds_played + 1, rounds)
 
     print(heading)
-    rounds_played += 1
 
     end_game = "no"
     while end_game == "no":
@@ -132,6 +134,3 @@ while rounds_played < rounds:
             break
         elif answer == "xxx":
             break
-
-
-
