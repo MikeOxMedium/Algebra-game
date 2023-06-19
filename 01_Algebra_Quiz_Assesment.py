@@ -16,6 +16,7 @@ def yes_no(question):
         else:
             print("Please answer yes / no")
 
+
 # Shows the instructions
 
 
@@ -52,6 +53,7 @@ def statement_generator(statement, decoration):
 
     return ""
 
+
 # Asks how many rounds or press <enter> for infinite mode
 
 
@@ -76,6 +78,40 @@ def check_rounds():
         return response
 
 
+def num_check(question, low, high):
+    error = "PLease enter a whole number between 1 and 10\n"
+
+    valid = False
+    while not valid:
+        try:
+            # ask the question
+            response = int(input(question))
+            # if the amount is too low / too high give
+            if low < response <= high:
+                return response
+
+            # output an error
+            else:
+                print(error)
+
+        except ValueError:
+            print(error)
+
+
+def generate_equation():
+    # Generate random coefficients and constants
+    a = random.randint(-10, 10)
+    b = random.randint(-10, 10)
+    c = random.randint(-10, 10)
+
+    # Create the equation string
+    equation = f"{a}x + {b} = {c}"
+    equation = f"{a}x = {c}"
+    equation = f"{a}x - {b} = {c}"
+    equation = f"{a} + x = {c}"
+    return equation
+
+
 statement_generator("Welcome to The Algebra Quiz", "*")
 print()
 
@@ -85,7 +121,6 @@ played_before = yes_no("Have you played this game before? ")
 
 if played_before == "no":
     instructions()
-
 
 # List of valid response
 
@@ -105,32 +140,28 @@ while rounds_played < rounds:
 
     print()
     if mode == "infinite":
-        heading = "Continuous Mode: "
+        heading = "Infinite Mode: "
         rounds += 1
 
     else:
         heading = "Round {} of " \
                   "{}".format(rounds_played + 1, rounds)
 
+    if mode == "infinite":
+        heading = f"Round {rounds_played + 1} (infinite mode)"
+        rounds += 1
+    else:
+        heading = f"Round {rounds_played + 1} of {rounds}"
+
     print(heading)
 
-    end_game = "no"
-    while end_game == "no":
+    rounds_played += 1
 
-        if mode == "infinite":
-            heading = f"Round {rounds_played + 1} (infinite mode)"
-            rounds += 1
-        else:
-            heading = f"Round {rounds_played + 1} of {rounds}"
+    print(generate_equation())
+    answer = input("What is 'x' in the above equation (xxx to quit): ")
 
-        print(heading)
-
-        rounds_played += 1
-
-        answer = input("press enter")
-
-        # check if we are out of rounds
-        if rounds_played >= rounds:
-            break
-        elif answer == "xxx":
-            break
+    # check if we are out of rounds
+    if rounds_played >= rounds:
+        break
+    elif answer == "xxx":
+        break
