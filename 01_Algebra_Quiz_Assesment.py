@@ -113,7 +113,8 @@ if played_before == "no":
 yes_no_list = ["yes", "no"]
 equations_list = ["{a}x + {b} = {c}",
                   "{a}x - {b} = {c}",
-                  "{a} + x = {c}"]
+                  "{a} + x = {c}",
+                  "{a} - x = {c}"]
 
 rounds_played = 0
 rounds_lost = 0
@@ -145,12 +146,31 @@ while rounds_played < rounds:
 
     print(heading)
 
-    rounds_played += 1
+    while True:
+        # Generate random coefficients and constants
+        a = random.randint(-10, 10)
+        b = random.randint(-10, 10)
+        c = random.randint(-10, 10)
 
-    # Generate random coefficients and constants
-    a = random.randint(-10, 10)
-    b = random.randint(-10, 10)
-    c = random.randint(-10, 10)
+        equations_list = [1, 2, 3, 4]
+
+        equation = random.choice(equations_list)
+        equation = 1
+
+        if equation == 1:
+            a = random.randint(-10, 10)
+            x = random.randint(-10, 10)
+            b = random.randint(-10, 10)
+
+        c = a * x + b
+        question = f"{a}x + {b} = {c}"
+
+        print(question)
+        print("answer", x)
+
+        input()
+
+    rounds_played += 1
 
     # Create the equation string
     equation = random.choice(equations_list)
