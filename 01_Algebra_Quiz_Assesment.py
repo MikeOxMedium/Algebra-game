@@ -26,7 +26,7 @@ def instructions():
     print()
     print("You are going to get asked a series of algebra questions")
     print("You need to find the value of x:")
-    print("You need to answer these questions correctly in able to win more points")
+    print("You need to answer these questions correctly in able to have a higher winning percentage")
     print()
     print("Answer these questions carefully")
     print("The value of x will on almost every occasion be less than the answer in the question")
@@ -98,20 +98,6 @@ def num_check(question, low, high):
             print(error)
 
 
-def generate_equation():
-    # Generate random coefficients and constants
-    a = random.randint(-10, 10)
-    b = random.randint(-10, 10)
-    c = random.randint(-10, 10)
-
-    # Create the equation string
-    equation = f"{a}x + {b} = {c}"
-    equation = f"{a}x = {c}"
-    equation = f"{a}x - {b} = {c}"
-    equation = f"{a} + x = {c}"
-    return equation
-
-
 statement_generator("Welcome to The Algebra Quiz", "*")
 print()
 
@@ -119,11 +105,15 @@ print()
 
 played_before = yes_no("Have you played this game before? ")
 
+# If they say no to played_before, then show instructions
 if played_before == "no":
     instructions()
 
 # List of valid response
-
+yes_no_list = ["yes", "no"]
+equations_list = ["{a}x + {b} = {c}",
+                  "{a}x - {b} = {c}",
+                  "{a} + x = {c}"]
 
 rounds_played = 0
 rounds_lost = 0
@@ -157,8 +147,15 @@ while rounds_played < rounds:
 
     rounds_played += 1
 
-    print(generate_equation())
-    answer = input("What is 'x' in the above equation (xxx to quit): ")
+    # Generate random coefficients and constants
+    a = random.randint(-10, 10)
+    b = random.randint(-10, 10)
+    c = random.randint(-10, 10)
+
+    # Create the equation string
+    equation = random.choice(equations_list)
+    print(equation)
+    answer = input("What is 'x' in the equation above (xxx to quit): ")
 
     # check if we are out of rounds
     if rounds_played >= rounds:
