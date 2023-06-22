@@ -1,6 +1,29 @@
+def check_rounds():
+    while True:
+        response = input("How many rounds? or press <Enter> for infinite mode: ")
+
+        round_error = "Please type either <enter> " \
+                      "or an integer that is more than 0\n"
+        if response != "":
+            try:
+                response = int(response)
+
+                if response < 1:
+                    print(round_error)
+                    continue
+
+            except ValueError:
+                print(round_error)
+                continue
+
+        return response
+
+
 rounds_played = 0
 rounds_lost = 0
 rounds_drawn = 0
+
+mode = "regular"
 
 rounds = check_rounds()
 if rounds == "":
@@ -11,19 +34,12 @@ while rounds_played < rounds:
 
     print()
     if mode == "infinite":
-        heading = "Continuous Mode: " \
-                  "Round {}".format(rounds_played + 1)
+        heading = "Continuous Mode: "
         rounds += 1
 
     else:
         heading = "Round {} of " \
                   "{}".format(rounds_played + 1, rounds)
-
-    print(heading)
-    rounds_played += 1
-
-    end_game = "no"
-    while end_game == "no":
 
         if mode == "infinite":
             heading = f"Round {rounds_played + 1} (infinite mode)"
@@ -32,8 +48,6 @@ while rounds_played < rounds:
             heading = f"Round {rounds_played + 1} of {rounds}"
 
         print(heading)
-
-        rounds_played += 1
 
         answer = input("press enter")
 
