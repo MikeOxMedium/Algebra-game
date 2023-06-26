@@ -119,6 +119,8 @@ equations_list = ["{a}x + {b} = {c}",
 questions_answered = 0
 num_wrong = 0
 
+# Deciding between infinite of regular mode
+
 mode = "regular"
 
 rounds = check_rounds()
@@ -202,6 +204,12 @@ while questions_answered < rounds:
     equation = random.choice(equations_list)
     print(question)
     answer = input("What is 'x' in the equation above (xxx to quit): ")
+
+    if "answer" == "x":
+        print("!!! Correct !!!")
+
+    else:
+        print("That's Wrong")
 
     # check if we are out of rounds
     if questions_answered >= rounds:

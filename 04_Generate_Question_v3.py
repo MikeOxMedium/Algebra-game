@@ -45,7 +45,7 @@ while True:
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    x = c - a
+    c = x + a
     question = f"{a} + x = {c}"
 
     print(question)
@@ -59,10 +59,10 @@ while True:
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    x = c + a
+    c = x - a
     question = f"{a} - x = {c}"
 
-    print(equation)
+    print(question)
     print("answer", x)
 
     input()
