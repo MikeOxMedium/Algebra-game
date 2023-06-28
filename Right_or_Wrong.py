@@ -111,10 +111,7 @@ if played_before == "no":
 
 # List of valid response
 yes_no_list = ["yes", "no"]
-equations_list = ["{a}x + {b} = {c}",
-                  "{a}x - {b} = {c}",
-                  "{a} + x = {c}",
-                  "{a} - x = {c}"]
+equations_list = [1, 2, 3, 4]
 
 questions_answered = 0
 num_wrong = 0
@@ -151,65 +148,61 @@ while questions_answered < rounds:
     a = random.randint(-10, 10)
     b = random.randint(-10, 10)
     c = random.randint(-10, 10)
+    x = random.randint(-10, 10)
 
     equations_list = [1, 2, 3, 4]
 
     equation = random.choice(equations_list)
-    equation = 1
 
     if equation == 1:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = a * x + b
-    question = f"{a}x + {b} = {c}"
-
-    equation = random.choice(equations_list)
-    equation = 2
+        c = a * x + b
+        question = f"{a}x + {b} = {c}"
 
     if equation == 2:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = a * x - b
-    question = f"{a}x - {b} = {c}"
-
-    equation = random.choice(equations_list)
-    equation = 3
+        c = a * x - b
+        question = f"{a}x - {b} = {c}"
 
     if equation == 3:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = x + a
-    question = f"{a} + x = {c}"
-
-    equation = random.choice(equations_list)
-    equation = 4
+        c = x + a
+        question = f"{a} + x = {c}"
 
     if equation == 4:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = x - a
-    question = f"{a} - x = {c}"
+        c = x - a
+        question = f"{a} - x = {c}"
 
     questions_answered += 1
+    answer = ""
 
-    # Create the equation string
-    equation = random.choice(equations_list)
-    print(question)
-    answer = input("What is 'x' in the equation above (xxx to quit): ")
+    while answer == "":
+        # Create the equation string
+        print(question)
+        answer = input("What is 'x' in the equation above (xxx to quit): ")
 
-    if "answer" == "x":
-        print("!!! Correct !!!")
 
-    else:
-        print("That's Wrong")
+        if answer == "":
+            print("please enter a full number or 'xxx' to quit")
+
+        if answer == x:
+            print("!!! Correct !!!")
+
+        else:
+            print("That's Wrong")
 
     # check if we are out of rounds
     if questions_answered >= rounds:
