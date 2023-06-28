@@ -98,6 +98,43 @@ def num_check(question, low, high):
             print(error)
 
 
+def int_check(question, low=None, high=None, exit_code=None):
+    if low is None and high is None:
+        error = "Please enter an integer"
+        situation = "any integer"
+    if low is not None and high is not None:
+        error = f"Please enter an integer between {low} and {high}"
+        situation = "both"
+    else:
+        error = f"Please enter a number more than {low} or 'xxx' to quit"
+        situation = "low only"
+
+    while True:
+        response = input(question).lower()
+        if response == exit_code:
+            return response
+
+        try:
+            response = int(response)
+
+            # check that integer is valid (ie: not too low / too hig etc)
+            if situation == "any integer":
+                return response
+
+            elif situation == "both":
+                if low <= response <= high:
+                    return response
+
+            elif situation == "low only":
+                if response >= low:
+                    return response
+
+            print(error)
+
+        except ValueError:
+            print(error)
+
+
 statement_generator("Welcome to The Algebra Quiz", "*")
 print()
 
@@ -115,6 +152,8 @@ equations_list = [1, 2, 3, 4]
 
 questions_answered = 0
 num_wrong = 0
+
+# Deciding between infinite of regular mode
 
 mode = "regular"
 
@@ -157,58 +196,55 @@ while questions_answered < rounds:
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = a * x + b
-    question = f"{a}x + {b} = {c}"
-
-    equation = random.choice(equations_list)
+        c = a * x + b
+        question = f"{a}x + {b} = {c}"
 
     if equation == 2:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = a * x - b
-    question = f"{a}x - {b} = {c}"
-
-    equation = random.choice(equations_list)
+        c = a * x - b
+        question = f"{a}x - {b} = {c}"
 
     if equation == 3:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = x + a
-    question = f"{a} + x = {c}"
-
-    equation = random.choice(equations_list)
+        c = x + a
+        question = f"{a} + x = {c}"
 
     if equation == 4:
         a = random.randint(-10, 10)
         x = random.randint(-10, 10)
         b = random.randint(-10, 10)
 
-    c = x - a
-    question = f"{a} - x = {c}"
+        c = x - a
+        question = f"{a} - x = {c}"
 
     questions_answered += 1
     answer = ""
 
-    while answer == "":
+    if answer == "":
         # Create the equation string
         print(question)
-        answer = input("What is 'x' in the equation above (xxx to quit): ")
+        answer = int_check("What is 'x' in the equation above (xxx to quit)", -20, exit_code="xxx")
 
         if answer == "":
             print("please enter a full number or 'xxx' to quit")
 
-        if int(answer) == x:
+        elif answer == "xxx":
+            break
+
+        elif int(answer) == x:
             print("!!! Correct !!!")
 
         else:
             print("That's Wrong")
+            print("The answer was", x)
 
     # check if we are out of rounds
     if questions_answered >= rounds:
         break
-    elif answer == "xxx":
-        break
+
