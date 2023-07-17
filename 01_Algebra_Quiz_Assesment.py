@@ -241,11 +241,14 @@ while questions_answered < rounds:
 
         elif int(answer) == x:
             print("!!! Correct !!!")
+            questions_right += 1
 
         else:
             print("That's Wrong")
             print("The answer was", x)
+            num_wrong += 1
 
+    # Shows the game summary
     questions_right = questions_answered - num_wrong
     num_wrong = questions_answered - questions_right
     game_summary.append(heading)
@@ -253,7 +256,7 @@ while questions_answered < rounds:
 
     if questions_answered >= rounds:
         break
-
+# Shows the questions and amount of rounds and if they were right or wrong and what the answer was
 if questions_answered > 0:
     percent_right = questions_right / questions_answered * 100
     percent_wrong = num_wrong / questions_answered * 100
@@ -264,12 +267,12 @@ if questions_answered > 0:
         print(outcome)
 
     print()
-
+    # Showing the percentage of wrong and right answers
     print("****** Game Statistics ******")
     print("Correct: {}, ({:.0f}%)\nWrong: {}, ({:.0f}%)\n, ".format(questions_right, percent_right, num_wrong,
                                                                     percent_wrong))
 
-    # End of Game Statements
+    # How many were right and wrong
     print()
     print('***** End Game Summary *****')
     print("Correct: {} \t|\t Wrong: {} \t|\t "
