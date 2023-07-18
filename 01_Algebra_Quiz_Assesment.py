@@ -59,7 +59,7 @@ def statement_generator(statement, decoration):
 
 def check_rounds():
     while True:
-        response = input("How many rounds? or press <Enter> for infinite mode: ")
+        response = input("How many questions do you want to answer? or press <Enter> for infinite mode: ")
 
         round_error = "Please type either <enter> " \
                       "or an integer that is more than 0\n"
@@ -140,7 +140,7 @@ print()
 
 # Main Routine goes here...
 
-played_before = yes_no("Have you played this game before? ")
+played_before = yes_no("Have you played this quiz before? ")
 
 # If they say no to played_before, then show instructions
 if played_before == "no":
@@ -151,76 +151,63 @@ yes_no_list = ["yes", "no"]
 equations_list = [1, 2, 3, 4]
 
 questions_answered = 0
+questions_right = 0
 num_wrong = 0
 
 # Deciding between infinite of regular mode
 
 mode = "regular"
 
-game_summary = []
+quiz_summary = []
 
-rounds = check_rounds()
-if rounds == "":
+questions = check_rounds()
+if questions == "":
     mode = "infinite"
-    rounds = 5
+    questions = 5
 
-while questions_answered < rounds:
+while questions_answered < questions:
 
     print()
     if mode == "infinite":
         heading = "Infinite Mode: "
-        rounds += 1
+        questions += 1
 
     else:
         heading = "Round {} of " \
-                  "{}".format(questions_answered + 1, rounds)
+                  "{}".format(questions_answered + 1, questions)
 
     if mode == "infinite":
-        heading = f"Round {questions_answered + 1} (infinite mode)"
-        rounds += 1
+        heading = f"Question {questions_answered + 1} (infinite mode)"
+        questions += 1
     else:
-        heading = f"Round {questions_answered + 1} of {rounds}"
+        heading = f"Question {questions_answered + 1} of {questions}"
 
     print(heading)
 
     # Generate random coefficients and constants
-    a = random.randint(-10, 10)
-    b = random.randint(-10, 10)
-    c = random.randint(-10, 10)
-    x = random.randint(-10, 10)
+    a = random.randint(-20, 10)
+    b = random.randint(-20, 10)
+    c = random.randint(-20, 10)
+    x = random.randint(-20, 10)
 
     equations_list = [1, 2, 3, 4]
 
     equation = random.choice(equations_list)
 
     if equation == 1:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
         c = a * x + b
         question = f"{a}x + {b} = {c}"
 
     if equation == 2:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
         c = a * x - b
         question = f"{a}x - {b} = {c}"
 
     if equation == 3:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
 
         c = x + a
         question = f"{a} + x = {c}"
 
     if equation == 4:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
 
         c = x - a
         question = f"{a} - x = {c}"
@@ -234,7 +221,7 @@ while questions_answered < rounds:
         answer = int_check("What is 'x' in the equation above (xxx to quit)", -20, exit_code="xxx")
 
         if answer == "":
-            print("please enter a full number or 'xxx' to quit")
+            print("please enter a whole number or 'xxx' to quit")
 
         elif answer == "xxx":
             break
@@ -248,13 +235,14 @@ while questions_answered < rounds:
             print("The answer was", x)
             num_wrong += 1
 
-    # Shows the game summary
+    # Shows the quiz summary
     questions_right = questions_answered - num_wrong
     num_wrong = questions_answered - questions_right
-    game_summary.append(heading)
-    game_summary.append("Question: {}\tAnswer: {}\tResult: {}".format(question, answer, "Correct" if int(answer) == x else "Wrong"))
+    quiz_summary.append(heading)
+    quiz_summary.append(
+        "Question: {}\tAnswer: {}\tResult: {}".format(question, answer, "Correct" if int(answer) == x else "Wrong"))
 
-    if questions_answered >= rounds:
+    if questions_answered >= questions:
         break
 # Shows the questions and amount of rounds and if they were right or wrong and what the answer was
 if questions_answered > 0:
@@ -262,19 +250,19 @@ if questions_answered > 0:
     percent_wrong = num_wrong / questions_answered * 100
 
     print()
-    print("***** Game History *****")
-    for outcome in game_summary:
+    print("***** Quiz History *****")
+    for outcome in quiz_summary:
         print(outcome)
 
     print()
     # Showing the percentage of wrong and right answers
-    print("****** Game Statistics ******")
-    print("Correct: {}, ({:.0f}%)\nWrong: {}, ({:.0f}%)\n, ".format(questions_right, percent_right, num_wrong,
-                                                                    percent_wrong))
+    print("****** Quiz Statistics ******")
+    print("Correct: {}, ({:.0f}%)\nWrong: {}, ({:.0f}%)\n ".format(questions_right, percent_right, num_wrong,
+                                                                   percent_wrong))
 
     # How many were right and wrong
     print()
-    print('***** End Game Summary *****')
+    print('***** End Quiz Summary *****')
     print("Correct: {} \t|\t Wrong: {} \t|\t "
           .format(questions_right, num_wrong, ))
 
