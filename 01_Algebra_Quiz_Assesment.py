@@ -194,25 +194,25 @@ while questions_answered < questions:
 
     equation = random.choice(equations_list)
 
+    # Shows a question like 3x + 5 = 20
     if equation == 1:
         c = a * x + b
         question = f"{a}x + {b} = {c}"
 
+    # Shows a question like 3x - 5 = 10
     if equation == 2:
         c = a * x - b
         question = f"{a}x - {b} = {c}"
 
+    # Shows a question like 3 + x = 7
     if equation == 3:
-
         c = x + a
         question = f"{a} + x = {c}"
 
+    # Shows a question like 3 - x = -5
     if equation == 4:
-
-        c = x - a
+        c = a - x
         question = f"{a} - x = {c}"
-
-    questions_answered += 1
     answer = ""
 
     if answer == "":
@@ -226,6 +226,7 @@ while questions_answered < questions:
         elif answer == "xxx":
             break
 
+        # Saying whether your answer was wrong or right
         elif int(answer) == x:
             print("!!! Correct !!!")
             questions_right += 1
@@ -234,6 +235,8 @@ while questions_answered < questions:
             print("That's Wrong")
             print("The answer was", x)
             num_wrong += 1
+
+    questions_answered += 1
 
     # Shows the quiz summary
     questions_right = questions_answered - num_wrong
@@ -244,14 +247,17 @@ while questions_answered < questions:
 
     if questions_answered >= questions:
         break
-# Shows the questions and amount of rounds and if they were right or wrong and what the answer was
+
+# Calculates the percentage of questions wrong and right
 if questions_answered > 0:
     percent_right = questions_right / questions_answered * 100
     percent_wrong = num_wrong / questions_answered * 100
 
+    # prints the full game history and what your answer was to the question
     print()
     print("***** Quiz History *****")
     for outcome in quiz_summary:
+
         print(outcome)
 
     print()
@@ -266,5 +272,7 @@ if questions_answered > 0:
     print("Correct: {} \t|\t Wrong: {} \t|\t "
           .format(questions_right, num_wrong, ))
 
+    # Exit statements
     print()
     print("Thanks for playing")
+    print("Hope you enjoyed my quiz")
