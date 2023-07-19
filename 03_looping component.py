@@ -1,6 +1,6 @@
 def check_rounds():
     while True:
-        response = input("How many rounds? or press <Enter> for infinite mode: ")
+        response = input("How many Questions? or press <Enter> for infinite mode: ")
 
         round_error = "Please type either <enter> " \
                       "or an integer that is more than 0\n"
@@ -19,40 +19,46 @@ def check_rounds():
         return response
 
 
-rounds_played = 0
-rounds_lost = 0
-rounds_drawn = 0
+# Setting the variables to zero
+questions_answered = 0
+questions_right = 0
+num_wrong = 0
 
 mode = "regular"
 
-rounds = check_rounds()
-if rounds == "":
+# Calls check_rounds() function
+questions = check_rounds()
+# If response is <Enter>, set mode to infinite
+if questions == "":
     mode = "infinite"
-    rounds = 5
+    questions = 5
 
-while rounds_played < rounds:
+while questions_answered < questions:
 
+    # Prints the heading for Infinite mode
     print()
     if mode == "infinite":
-        heading = "Continuous Mode: "
-        rounds += 1
+        heading = "Infinite Mode: "
+        questions += 1
 
+    # Makes sure if they respond with a whole number, says how many questions they are answering
     else:
-        heading = "Round {} of " \
-                  "{}".format(rounds_played + 1, rounds)
+        heading = "Question {} of " \
+                  "{}".format(questions_answered + 1, questions)
 
-        if mode == "infinite":
-            heading = f"Round {rounds_played + 1} (infinite mode)"
-            rounds += 1
-        else:
-            heading = f"Round {rounds_played + 1} of {rounds}"
+    # If mode is infinite, change heading to infinite
+    if mode == "infinite":
+        heading = f"Question {questions_answered + 1} (infinite mode)"
+        questions += 1
 
-        print(heading)
+    # Otherwise print a heading that compares how many questions to go
+    else:
+        heading = f"Question {questions_answered + 1} of {questions}"
 
-        answer = input("press enter")
+    answer = input("press enter")
 
-        # check if we are out of rounds
-        if rounds_played >= rounds:
-            break
-        elif answer == "xxx":
-            break
+    # check if we are out of rounds
+    if questions_answered >= questions:
+        break
+    elif answer == "xxx":
+        break

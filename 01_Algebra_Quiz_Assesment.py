@@ -18,8 +18,6 @@ def yes_no(question):
 
 
 # Shows the instructions
-
-
 def instructions():
     print()
     print("**** How to Play ****")
@@ -98,6 +96,8 @@ def num_check(question, low, high):
             print(error)
 
 
+# Makes sure the response to the answer is above a certain number and a whole number
+
 def int_check(question, low=None, high=None, exit_code=None):
     if low is None and high is None:
         error = "Please enter an integer"
@@ -135,6 +135,8 @@ def int_check(question, low=None, high=None, exit_code=None):
             print(error)
 
 
+# Prints the statement
+
 statement_generator("Welcome to The Algebra Quiz", "*")
 print()
 
@@ -150,41 +152,50 @@ if played_before == "no":
 yes_no_list = ["yes", "no"]
 equations_list = [1, 2, 3, 4]
 
+# Setting the variables to zero
 questions_answered = 0
 questions_right = 0
 num_wrong = 0
 
-# Deciding between infinite of regular mode
 
 mode = "regular"
 
 quiz_summary = []
 
+# Calls check_rounds() function
 questions = check_rounds()
+
+# If response is <Enter>, set mode to infinite
 if questions == "":
     mode = "infinite"
     questions = 5
 
 while questions_answered < questions:
 
+    # Prints the heading for Infinite mode
     print()
     if mode == "infinite":
         heading = "Infinite Mode: "
         questions += 1
 
+    # Makes sure if they respond with a whole number, says how many questions they are answering
     else:
-        heading = "Round {} of " \
+        heading = "Question {} of " \
                   "{}".format(questions_answered + 1, questions)
 
+    # If mode is infinite, change heading to infinite
     if mode == "infinite":
         heading = f"Question {questions_answered + 1} (infinite mode)"
         questions += 1
+
+    # Otherwise print a heading that compares how many questions to go
     else:
         heading = f"Question {questions_answered + 1} of {questions}"
 
+    # Print the heading
     print(heading)
 
-    # Generate random coefficients and constants
+    # Generating values for the questions
     a = random.randint(-20, 10)
     b = random.randint(-20, 10)
     c = random.randint(-20, 10)
@@ -220,9 +231,11 @@ while questions_answered < questions:
         print(question)
         answer = int_check("What is 'x' in the equation above (xxx to quit)", -20, exit_code="xxx")
 
+        # Prints the print statement if a whole number or xxx was not the response to the question
         if answer == "":
             print("please enter a whole number or 'xxx' to quit")
 
+        # Breaks code if they respond with 'xxx'
         elif answer == "xxx":
             break
 
@@ -257,7 +270,6 @@ if questions_answered > 0:
     print()
     print("***** Quiz History *****")
     for outcome in quiz_summary:
-
         print(outcome)
 
     print()
