@@ -1,65 +1,9 @@
 import random
 
 
-# checks users enter yes / no for a given question
-def yes_no(question):
-    valid = False
-    while not valid:
-        response = input(question).lower()
-
-        if response == "yes" or response == "y":
-            return "yes"
-
-        elif response == "no" or response == "n":
-            return "no"
-
-        else:
-            print("Please answer yes / no")
-
-
-# Shows the instructions
-
-
-def instructions():
-    print()
-    print("**** How to Play ****")
-    print()
-    print("You are going to get asked a series of algebra questions")
-    print("You need to find the value of x:")
-    print("You need to answer these questions correctly in able to have a higher winning percentage")
-    print()
-    print("Answer these questions carefully")
-    print("The value of x will on almost every occasion be less than the answer in the question")
-    print("And make sure you put down the right numbers")
-    print()
-    print("When asked for the amount of rounds u want to play")
-    print("You can choose <enter> for infinite mode, or a number for the certain amount of rounds")
-    print("Make sure to answer these questions carefully and get as many questions right as possible")
-    print("Good luck and have fun")
-    print()
-
-
-# Generates a decoration for the welcoming statement
-
-def statement_generator(statement, decoration):
-    sides = decoration * 3
-
-    statement = "{} {} {}".format(sides, statement, sides)
-    top_bottom = decoration * len(statement)
-
-    print(top_bottom)
-    print(statement)
-    print(top_bottom)
-
-    return ""
-
-
-# Asks how many rounds or press <enter> for infinite mode
-
-
 def check_rounds():
     while True:
-        response = input("How many rounds? or press <Enter> for infinite mode: ")
+        response = input("How many Questions? or press <Enter> for infinite mode: ")
 
         round_error = "Please type either <enter> " \
                       "or an integer that is more than 0\n"
@@ -76,26 +20,6 @@ def check_rounds():
                 continue
 
         return response
-
-
-def num_check(question, low, high):
-    error = "PLease enter a whole number between 1 and 10\n"
-
-    valid = False
-    while not valid:
-        try:
-            # ask the question
-            response = int(input(question))
-            # if the amount is too low / too high give
-            if low < response <= high:
-                return response
-
-            # output an error
-            else:
-                print(error)
-
-        except ValueError:
-            print(error)
 
 
 def int_check(question, low=None, high=None, exit_code=None):
@@ -135,95 +59,75 @@ def int_check(question, low=None, high=None, exit_code=None):
             print(error)
 
 
-statement_generator("Welcome to The Algebra Quiz", "*")
-print()
-
-# Main Routine goes here...
-
-played_before = yes_no("Have you played this game before? ")
-
-# If they say no to played_before, then show instructions
-if played_before == "no":
-    instructions()
-
-# List of valid response
-yes_no_list = ["yes", "no"]
-equations_list = [1, 2, 3, 4]
-
+# Setting the variables to zero
 questions_answered = 0
+questions_right = 0
 num_wrong = 0
-
-# Deciding between infinite of regular mode
 
 mode = "regular"
 
-rounds = check_rounds()
-if rounds == "":
+# Calls check_rounds() function
+questions = check_rounds()
+
+
+# If response is <Enter>, set mode to infinite
+if questions == "":
     mode = "infinite"
-    rounds = 5
+    questions = 5
 
-while questions_answered < rounds:
+while questions_answered < questions:
 
+    # Prints the heading for Infinite mode
     print()
     if mode == "infinite":
         heading = "Infinite Mode: "
-        rounds += 1
+        questions += 1
 
+    # Makes sure if they respond with a whole number, says how many questions they are answering
     else:
-        heading = "Round {} of " \
-                  "{}".format(questions_answered + 1, rounds)
+        heading = "Question {} of " \
+                  "{}".format(questions_answered + 1, questions)
 
+    # If mode is infinite, change heading to infinite
     if mode == "infinite":
-        heading = f"Round {questions_answered + 1} (infinite mode)"
-        rounds += 1
+        heading = f"Question {questions_answered + 1} (infinite mode)"
+        questions += 1
+
+    # Otherwise print a heading that compares how many questions to go
     else:
-        heading = f"Round {questions_answered + 1} of {rounds}"
+        heading = f"Question {questions_answered + 1} of {questions}"
 
     print(heading)
 
-    # Generate random coefficients and constants
-    a = random.randint(-10, 10)
-    b = random.randint(-10, 10)
-    c = random.randint(-10, 10)
-    x = random.randint(-10, 10)
+    # Generating values for the questions
+    a = random.randint(-20, 10)
+    b = random.randint(-20, 10)
+    c = random.randint(-20, 10)
+    x = random.randint(-20, 10)
 
     equations_list = [1, 2, 3, 4]
 
     equation = random.choice(equations_list)
 
+    # Shows a question like 3x + 5 = 20
     if equation == 1:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
         c = a * x + b
         question = f"{a}x + {b} = {c}"
 
+    # Shows a question like 3x - 5 = 10
     if equation == 2:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
         c = a * x - b
         question = f"{a}x - {b} = {c}"
 
+    # Shows a question like 3 + x = 7
     if equation == 3:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
         c = x + a
         question = f"{a} + x = {c}"
 
+    # Shows a question like 3 - x = -5
     if equation == 4:
-        a = random.randint(-10, 10)
-        x = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-
-        c = x - a
+        c = a - x
         question = f"{a} - x = {c}"
-
-    questions_answered += 1
     answer = ""
 
     if answer == "":
@@ -231,20 +135,29 @@ while questions_answered < rounds:
         print(question)
         answer = int_check("What is 'x' in the equation above (xxx to quit)", -20, exit_code="xxx")
 
+        # Prints the print statement if a whole number or xxx was not the response to the question
         if answer == "":
-            print("please enter a full number or 'xxx' to quit")
+            print("please enter a whole number or 'xxx' to quit")
 
+        # Breaks code if they respond with 'xxx'
         elif answer == "xxx":
             break
 
+        # Saying whether their answer was right or wrong
         elif int(answer) == x:
             print("!!! Correct !!!")
+            questions_right += 1
 
         else:
             print("That's Wrong")
             print("The answer was", x)
+            num_wrong += 1
 
-    # check if we are out of rounds
-    if questions_answered >= rounds:
+    questions_answered += 1
+
+    if questions_answered >= questions:
         break
+
+
+
 

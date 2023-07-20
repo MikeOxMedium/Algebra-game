@@ -26,12 +26,11 @@ def instructions():
     print("You need to find the value of x:")
     print("You need to answer these questions correctly in able to have a higher winning percentage")
     print()
-    print("Answer these questions carefully")
-    print("The value of x will on almost every occasion be less than the answer in the question")
-    print("And make sure you put down the right numbers")
-    print()
     print("When asked for the amount of rounds u want to play")
     print("You can choose <enter> for infinite mode, or a number for the certain amount of rounds")
+    print()
+    print("You can play as many rounds as you want")
+    print("And when you feel like you want to quit, just press 'xxx' and the game will end")
     print("Make sure to answer these questions carefully and get as many questions right as possible")
     print("Good luck and have fun")
     print()
@@ -239,7 +238,7 @@ while questions_answered < questions:
         elif answer == "xxx":
             break
 
-        # Saying whether your answer was wrong or right
+        # Saying whether their answer was right or wrong
         elif int(answer) == x:
             print("!!! Correct !!!")
             questions_right += 1

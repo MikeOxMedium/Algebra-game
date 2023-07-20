@@ -28,6 +28,8 @@ mode = "regular"
 
 # Calls check_rounds() function
 questions = check_rounds()
+
+
 # If response is <Enter>, set mode to infinite
 if questions == "":
     mode = "infinite"
@@ -55,7 +57,11 @@ while questions_answered < questions:
     else:
         heading = f"Question {questions_answered + 1} of {questions}"
 
+    print(heading)
+
     answer = input("press enter")
+
+    questions_answered += 1
 
     # check if we are out of rounds
     if questions_answered >= questions:
